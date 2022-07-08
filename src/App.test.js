@@ -28,7 +28,9 @@ describe("Testing that the form renders correctly", () => {
   });
 });
 
-describe("Testing that the form renders correctly", () => {
+//Task creation testing
+
+describe("Testing that the task renders correctly", () => {
 
   test("Checking that the checkbox is rendered after a task is created", () => {
     render(<App />);
@@ -39,7 +41,7 @@ describe("Testing that the form renders correctly", () => {
   });
 
   test("Checking that 2 buttons are now rendered on the screen after a task has been created", () => {
-    render(<App />)
+    render(<App />);
     let button = screen.getByRole("button");
     fireEvent.click(button);
     let buttons = screen.getAllByRole("button");
@@ -47,15 +49,34 @@ describe("Testing that the form renders correctly", () => {
   });
 
   test("Checking that 2 buttons are now rendered on the screen after a task has been created", () => {
-    render(<App />)
+    render(<App />);
     let formInput = screen.getByRole("textbox");
-    fireEvent.change(formInput, { target: { value: "This is a test task" }});
+    fireEvent.change(formInput, { target: { value: "This is a test task" } });
     let button = screen.getByRole("button");
     fireEvent.click(button);
     let task = screen.getByText("This is a test task");
     expect(task).toBeInTheDocument();
 
-    //This text is definitely found in the task, as setting expect to ".not.toBeInTheDocument" gives the failed error: 
+    //This text is definitely found in the task, as setting expect to ".not.toBeInTheDocument" gives the failed error:
     //'expected document not to contain element, found <p style="color: rgb(238, 238, 238);">This is a test task</p>' instead
   });
+});
+
+
+//Task removal testing
+
+test("Testing the remove button and checking that a task has been removed", () => {
+  render(<App />);
+  let formInput = screen.getByRole("textbox");
+  fireEvent.change(formInput, { target: { value: "This is a test task" } });
+  let button = screen.getByRole("button");
+  fireEvent.click(button);
+  let task = screen.getByText("This is a test task");
+  //Task has been created
+
+  let remove = screen.getByText("Remove");
+  fireEvent.click(remove);
+  //Remove button has been pressed
+  expect(task).not.toBeInTheDocument();
+  //Task is now gone
 });
