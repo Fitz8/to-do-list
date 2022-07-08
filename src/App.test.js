@@ -8,7 +8,7 @@ test("Testing that the main heading for the application renders", () => {
 });
 
 describe("Testing that the form renders correctly", () => {
-    
+
   test("Rendering the subheader", () => {
     render(<App />);
     let subheader = screen.getByText("Create a task");
@@ -56,6 +56,6 @@ describe("Testing that the form renders correctly", () => {
     expect(task).toBeInTheDocument();
 
     //This text is definitely found in the task, as setting expect to ".not.toBeInTheDocument" gives the failed error: 
-    //expected document not to contain element, found <p style="color: rgb(238, 238, 238);">This is a test task</p> instead
+    //'expected document not to contain element, found <p style="color: rgb(238, 238, 238);">This is a test task</p>' instead
   });
 });
